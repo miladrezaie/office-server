@@ -16,7 +16,6 @@ import javax.persistence.*;
 public class Tajhizat {
 
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

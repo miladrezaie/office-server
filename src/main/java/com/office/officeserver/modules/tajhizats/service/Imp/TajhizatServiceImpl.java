@@ -34,9 +34,11 @@ public class TajhizatServiceImpl implements TajhizatService {
         return new ResponseEntity<>(tajhizatRepository.findById(id), HttpStatus.ACCEPTED);
     }
 
+
     public Tajhizat save(Tajhizat t) {
         return tajhizatRepository.save(t);
     }
+
 
     public void delete(Long id) {
         tajhizatRepository.deleteById(id);
