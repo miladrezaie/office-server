@@ -1,6 +1,6 @@
-package com.office.officeserver.modules.tajhizats.repository;
+package com.office.officeserver.modules.v1.api.tajhizats.repository;
 
-import com.office.officeserver.modules.tajhizats.model.Tajhizat;
+import com.office.officeserver.modules.v1.api.tajhizats.model.Tajhizat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

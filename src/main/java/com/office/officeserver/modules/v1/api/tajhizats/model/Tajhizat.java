@@ -1,4 +1,4 @@
-package com.office.officeserver.modules.tajhizats.model;
+package com.office.officeserver.modules.v1.api.tajhizats.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

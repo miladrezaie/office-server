@@ -1,14 +1,13 @@
-package com.office.officeserver.modules.tajhizats.service.Imp;
+package com.office.officeserver.modules.v1.api.tajhizats.service.Imp;
 
-import com.office.officeserver.modules.tajhizats.model.Tajhizat;
-import com.office.officeserver.modules.tajhizats.repository.TajhizatRepository;
-import com.office.officeserver.modules.tajhizats.service.TajhizatService;
+import com.office.officeserver.modules.v1.api.tajhizats.model.Tajhizat;
+import com.office.officeserver.modules.v1.api.tajhizats.repository.TajhizatRepository;
+import com.office.officeserver.modules.v1.api.tajhizats.service.TajhizatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
