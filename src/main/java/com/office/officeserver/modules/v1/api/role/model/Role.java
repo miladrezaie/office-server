@@ -1,4 +1,4 @@
-package com.office.officeserver.modules.v1.api.officePlan.model;
+package com.office.officeserver.modules.v1.api.role.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.office.officeserver.modules.v1.api.tajhizats.model.Tajhizat;
@@ -12,12 +12,12 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "office_plans")
+@Table(name = "roles")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OfficePlan {
+public class Role {
 
     private static final long serialVersionUID = 1L;
 

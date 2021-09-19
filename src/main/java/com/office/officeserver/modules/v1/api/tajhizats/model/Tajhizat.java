@@ -24,7 +24,10 @@ public class Tajhizat {
     private String name;
 
     @Column(columnDefinition = "nvarchar(30)")
-    private String amvalid;
+    private String amvalId;
+
+    @Column(columnDefinition = "nvarchar(30)")
+    private String serialId;
 
     @Column(columnDefinition = "nvarchar(20)")
     private String type;
