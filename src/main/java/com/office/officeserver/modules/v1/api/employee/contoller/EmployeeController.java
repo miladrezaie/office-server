@@ -13,32 +13,34 @@ import java.util.Optional;
 @RequestMapping("/v1/api")
 public class EmployeeController {
 
-    @Autowired
-    EmployeeServiceImpl tajhizatService;
+    private final EmployeeServiceImpl employeeService;
+
+    public EmployeeController(EmployeeServiceImpl employeeService) {
+        this.employeeService = employeeService;
+    }
 
 
-
-    @GetMapping("/tajhizats")
+    @GetMapping("/employees")
     public List<Employee> getAll() {
-        return tajhizatService.getList();
+        return employeeService.getList();
     }
 
 
-    @PostMapping("/tajhizats")
-    public Employee saveTajhiz(@RequestBody Employee tajhizat) {
-        return tajhizatService.save(tajhizat);
+    @PostMapping("/employees")
+    public Employee saveEmployee(@RequestBody Employee employee) {
+        return employeeService.save(employee);
     }
 
 
-    @GetMapping("/tajhizats/{id}")
-    public ResponseEntity<Optional<Employee>> getTajhiz(@PathVariable Long id) {
-        return tajhizatService.getTajhizat(id);
+    @GetMapping("/employees/{id}")
+    public ResponseEntity<Optional<Employee>> getEmployee(@PathVariable Long id) {
+        return employeeService.getEmployee(id);
     }
 
 
-    @DeleteMapping("/tajhizats/{id}")
-    public void deleteTajhiz(@PathVariable Long id) {
-        tajhizatService.delete(id);
+    @DeleteMapping("/employees/{id}")
+    public void deleteEmployee(@PathVariable Long id) {
+        employeeService.delete(id);
 
     }
 }

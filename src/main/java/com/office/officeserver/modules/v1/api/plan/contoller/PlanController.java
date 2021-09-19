@@ -13,32 +13,34 @@ import java.util.Optional;
 @RequestMapping("/v1/api")
 public class PlanController {
 
-    @Autowired
-    PlanServiceImpl tajhizatService;
+    private final PlanServiceImpl PlanService;
+
+    public PlanController(PlanServiceImpl PlanService) {
+        this.PlanService = PlanService;
+    }
 
 
-
-    @GetMapping("/tajhizats")
+    @GetMapping("/Plans")
     public List<Plan> getAll() {
-        return tajhizatService.getList();
+        return PlanService.getList();
     }
 
 
-    @PostMapping("/tajhizats")
-    public Plan saveTajhiz(@RequestBody Plan tajhizat) {
-        return tajhizatService.save(tajhizat);
+    @PostMapping("/Plans")
+    public Plan savePlan(@RequestBody Plan Plan) {
+        return PlanService.save(Plan);
     }
 
 
-    @GetMapping("/tajhizats/{id}")
-    public ResponseEntity<Optional<Plan>> getTajhiz(@PathVariable Long id) {
-        return tajhizatService.getTajhizat(id);
+    @GetMapping("/Plans/{id}")
+    public ResponseEntity<Optional<Plan>> getPlan(@PathVariable Long id) {
+        return PlanService.getPlan(id);
     }
 
 
-    @DeleteMapping("/tajhizats/{id}")
-    public void deleteTajhiz(@PathVariable Long id) {
-        tajhizatService.delete(id);
+    @DeleteMapping("/Plans/{id}")
+    public void deletePlan(@PathVariable Long id) {
+        PlanService.delete(id);
 
     }
 }

@@ -5,6 +5,7 @@ import com.office.officeserver.modules.v1.api.tajhizats.service.Imp.TajhizatServ
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,9 +14,11 @@ import java.util.Optional;
 @RequestMapping("/v1/api")
 public class TajhizatController {
 
-    @Autowired
-    TajhizatServiceImpl tajhizatService;
+    private final TajhizatServiceImpl tajhizatService;
 
+    public TajhizatController(TajhizatServiceImpl tajhizatService) {
+        this.tajhizatService = tajhizatService;
+    }
 
 
     @GetMapping("/tajhizats")
@@ -25,8 +28,10 @@ public class TajhizatController {
 
 
     @PostMapping("/tajhizats")
-    public Tajhizat saveTajhiz(@RequestBody Tajhizat tajhizat) {
-        return tajhizatService.save(tajhizat);
+    public Tajhizat saveTajhiz(@ModelAttribute Tajhizat tajhizat,MultipartFile file) {
+        System.out.println("is ok...................................");
+
+        return tajhizatService.save(tajhizat,file);
     }
 
 
@@ -39,6 +44,5 @@ public class TajhizatController {
     @DeleteMapping("/tajhizats/{id}")
     public void deleteTajhiz(@PathVariable Long id) {
         tajhizatService.delete(id);
-
     }
 }

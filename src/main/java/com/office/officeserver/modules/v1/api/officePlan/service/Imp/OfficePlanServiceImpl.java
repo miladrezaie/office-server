@@ -15,31 +15,34 @@ import java.util.Optional;
 @Service
 public class OfficePlanServiceImpl implements OfficePlanService {
 
-    @Autowired
-    private OfficePlanRepository tajhizatRepository;
+    private final OfficePlanRepository officePlanRepository;
 
-
-    public List<OfficePlan> getList() {
-        List<OfficePlan> tajhizats = new ArrayList<>();
-        List<OfficePlan> allTajhizat = tajhizatRepository.findAll();
-        for (OfficePlan tajhizat : allTajhizat) {
-            tajhizats.add(tajhizat);
-        }
-        return tajhizats;
+    public OfficePlanServiceImpl(OfficePlanRepository officePlanRepository) {
+        this.officePlanRepository = officePlanRepository;
     }
 
 
-    public ResponseEntity<Optional<OfficePlan>> getTajhizat(Long id) {
-        return new ResponseEntity<>(tajhizatRepository.findById(id), HttpStatus.ACCEPTED);
+    public List<OfficePlan> getList() {
+        List<OfficePlan> officePlans = new ArrayList<>();
+        List<OfficePlan> allOfficePlan = officePlanRepository.findAll();
+        for (OfficePlan officePlan : allOfficePlan) {
+            officePlans.add(officePlan);
+        }
+        return officePlans;
+    }
+
+
+    public ResponseEntity<Optional<OfficePlan>> getOfficePlan(Long id) {
+        return new ResponseEntity<>(officePlanRepository.findById(id), HttpStatus.ACCEPTED);
     }
 
 
     public OfficePlan save(OfficePlan t) {
-        return tajhizatRepository.save(t);
+        return officePlanRepository.save(t);
     }
 
 
     public void delete(Long id) {
-        tajhizatRepository.deleteById(id);
+        officePlanRepository.deleteById(id);
     }
 }

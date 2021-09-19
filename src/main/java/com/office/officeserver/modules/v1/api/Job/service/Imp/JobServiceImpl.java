@@ -15,31 +15,30 @@ import java.util.Optional;
 @Service
 public class JobServiceImpl implements JobService {
 
-    @Autowired
-    private JobRepository tajhizatRepository;
+    private final JobRepository jobRepository;
 
+    public JobServiceImpl(JobRepository jobRepository) {
+        this.jobRepository = jobRepository;
+    }
 
     public List<Job> getList() {
-        List<Job> tajhizats = new ArrayList<>();
-        List<Job> allTajhizat = tajhizatRepository.findAll();
-        for (Job tajhizat : allTajhizat) {
-            tajhizats.add(tajhizat);
+        List<Job> jobs = new ArrayList<>();
+        List<Job> allJob = jobRepository.findAll();
+        for (Job job : allJob) {
+            jobs.add(job);
         }
-        return tajhizats;
+        return jobs;
     }
 
-
-    public ResponseEntity<Optional<Job>> getTajhizat(Long id) {
-        return new ResponseEntity<>(tajhizatRepository.findById(id), HttpStatus.ACCEPTED);
+    public ResponseEntity<Optional<Job>> getJob(Long id) {
+        return new ResponseEntity<>(jobRepository.findById(id), HttpStatus.ACCEPTED);
     }
-
 
     public Job save(Job t) {
-        return tajhizatRepository.save(t);
+        return jobRepository.save(t);
     }
 
-
     public void delete(Long id) {
-        tajhizatRepository.deleteById(id);
+        jobRepository.deleteById(id);
     }
 }

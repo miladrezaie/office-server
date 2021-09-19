@@ -15,31 +15,34 @@ import java.util.Optional;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    @Autowired
-    private EmployeeRepository tajhizatRepository;
+    private final EmployeeRepository employeeRepository;
 
-
-    public List<Employee> getList() {
-        List<Employee> tajhizats = new ArrayList<>();
-        List<Employee> allTajhizat = tajhizatRepository.findAll();
-        for (Employee tajhizat : allTajhizat) {
-            tajhizats.add(tajhizat);
-        }
-        return tajhizats;
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
 
-    public ResponseEntity<Optional<Employee>> getTajhizat(Long id) {
-        return new ResponseEntity<>(tajhizatRepository.findById(id), HttpStatus.ACCEPTED);
+    public List<Employee> getList() {
+        List<Employee> employees = new ArrayList<>();
+        List<Employee> allEmployee = employeeRepository.findAll();
+        for (Employee employee : allEmployee) {
+            employees.add(employee);
+        }
+        return employees;
+    }
+
+
+    public ResponseEntity<Optional<Employee>> getEmployee(Long id) {
+        return new ResponseEntity<>(employeeRepository.findById(id), HttpStatus.ACCEPTED);
     }
 
 
     public Employee save(Employee t) {
-        return tajhizatRepository.save(t);
+        return employeeRepository.save(t);
     }
 
 
     public void delete(Long id) {
-        tajhizatRepository.deleteById(id);
+        employeeRepository.deleteById(id);
     }
 }

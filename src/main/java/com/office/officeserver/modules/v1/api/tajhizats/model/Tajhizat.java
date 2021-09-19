@@ -1,11 +1,15 @@
 package com.office.officeserver.modules.v1.api.tajhizats.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.office.officeserver.modules.v1.api.officePlan.model.OfficePlan;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tajhizats")
@@ -37,4 +41,12 @@ public class Tajhizat {
 
     @Column(columnDefinition = "LONGBLOB")
     private String image;
+
+    @Transient
+    @JsonIgnore
+    private MultipartFile file;
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<OfficePlan> OfficePlan;
 }

@@ -16,30 +16,30 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository tajhizatRepository;
+    private UserRepository userRepository;
 
 
     public List<User> getList() {
-        List<User> tajhizats = new ArrayList<>();
-        List<User> allTajhizat = tajhizatRepository.findAll();
-        for (User tajhizat : allTajhizat) {
-            tajhizats.add(tajhizat);
+        List<User> users = new ArrayList<>();
+        List<User> allUser = userRepository.findAll();
+        for (User user : allUser) {
+            users.add(user);
         }
-        return tajhizats;
+        return users;
     }
 
 
-    public ResponseEntity<Optional<User>> getTajhizat(Long id) {
-        return new ResponseEntity<>(tajhizatRepository.findById(id), HttpStatus.ACCEPTED);
+    public ResponseEntity<Optional<User>> getUser(Long id) {
+        return new ResponseEntity<>(userRepository.findById(id), HttpStatus.ACCEPTED);
     }
 
 
     public User save(User t) {
-        return tajhizatRepository.save(t);
+        return userRepository.save(t);
     }
 
 
     public void delete(Long id) {
-        tajhizatRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 }

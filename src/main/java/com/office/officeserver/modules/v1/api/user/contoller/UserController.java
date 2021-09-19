@@ -13,32 +13,34 @@ import java.util.Optional;
 @RequestMapping("/v1/api")
 public class UserController {
 
-    @Autowired
-    UserServiceImpl tajhizatService;
+    private final UserServiceImpl userService;
+
+    public UserController(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
 
-
-    @GetMapping("/tajhizats")
+    @GetMapping("/users")
     public List<User> getAll() {
-        return tajhizatService.getList();
+        return userService.getList();
     }
 
 
-    @PostMapping("/tajhizats")
-    public User saveTajhiz(@RequestBody User tajhizat) {
-        return tajhizatService.save(tajhizat);
+    @PostMapping("/users")
+    public User saveUser(@RequestBody User user) {
+        return userService.save(user);
     }
 
 
-    @GetMapping("/tajhizats/{id}")
-    public ResponseEntity<Optional<User>> getTajhiz(@PathVariable Long id) {
-        return tajhizatService.getTajhizat(id);
+    @GetMapping("/users/{id}")
+    public ResponseEntity<Optional<User>> getUser(@PathVariable Long id) {
+        return userService.getUser(id);
     }
 
 
-    @DeleteMapping("/tajhizats/{id}")
-    public void deleteTajhiz(@PathVariable Long id) {
-        tajhizatService.delete(id);
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        userService.delete(id);
 
     }
 }

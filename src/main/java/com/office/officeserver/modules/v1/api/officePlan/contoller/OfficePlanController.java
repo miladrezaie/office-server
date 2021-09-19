@@ -14,31 +14,31 @@ import java.util.Optional;
 public class OfficePlanController {
 
     @Autowired
-    OfficePlanServiceImpl tajhizatService;
+    OfficePlanServiceImpl officePlanService;
 
 
 
-    @GetMapping("/tajhizats")
+    @GetMapping("/officePlans")
     public List<OfficePlan> getAll() {
-        return tajhizatService.getList();
+        return officePlanService.getList();
     }
 
 
-    @PostMapping("/tajhizats")
-    public OfficePlan saveTajhiz(@RequestBody OfficePlan tajhizat) {
-        return tajhizatService.save(tajhizat);
+    @PostMapping("/officePlans")
+    public OfficePlan saveOfficePlan(@RequestBody OfficePlan officePlan) {
+        return officePlanService.save(officePlan);
     }
 
 
-    @GetMapping("/tajhizats/{id}")
-    public ResponseEntity<Optional<OfficePlan>> getTajhiz(@PathVariable Long id) {
-        return tajhizatService.getTajhizat(id);
+    @GetMapping("/officePlans/{id}")
+    public ResponseEntity<Optional<OfficePlan>> getOfficePlan(@PathVariable Long id) {
+        return officePlanService.getOfficePlan(id);
     }
 
 
-    @DeleteMapping("/tajhizats/{id}")
-    public void deleteTajhiz(@PathVariable Long id) {
-        tajhizatService.delete(id);
+    @DeleteMapping("/officePlans/{id}")
+    public void deleteOfficePlan(@PathVariable Long id) {
+        officePlanService.delete(id);
 
     }
 }

@@ -14,31 +14,31 @@ import java.util.Optional;
 public class RoleController {
 
     @Autowired
-    RoleServiceImpl tajhizatService;
+    RoleServiceImpl roleService;
 
 
 
-    @GetMapping("/tajhizats")
+    @GetMapping("/roles")
     public List<Role> getAll() {
-        return tajhizatService.getList();
+        return roleService.getList();
     }
 
 
-    @PostMapping("/tajhizats")
-    public Role saveTajhiz(@RequestBody Role tajhizat) {
-        return tajhizatService.save(tajhizat);
+    @PostMapping("/roles")
+    public Role saveRole(@RequestBody Role role) {
+        return roleService.save(role);
     }
 
 
-    @GetMapping("/tajhizats/{id}")
-    public ResponseEntity<Optional<Role>> getTajhiz(@PathVariable Long id) {
-        return tajhizatService.getTajhizat(id);
+    @GetMapping("/roles/{id}")
+    public ResponseEntity<Optional<Role>> getRole(@PathVariable Long id) {
+        return roleService.getRole(id);
     }
 
 
-    @DeleteMapping("/tajhizats/{id}")
-    public void deleteTajhiz(@PathVariable Long id) {
-        tajhizatService.delete(id);
+    @DeleteMapping("/roles/{id}")
+    public void deleteRole(@PathVariable Long id) {
+        roleService.delete(id);
 
     }
 }

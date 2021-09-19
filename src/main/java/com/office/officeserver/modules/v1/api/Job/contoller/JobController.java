@@ -14,31 +14,31 @@ import java.util.Optional;
 public class JobController {
 
     @Autowired
-    JobServiceImpl tajhizatService;
+    JobServiceImpl jobService;
 
 
 
-    @GetMapping("/tajhizats")
+    @GetMapping("/jobs")
     public List<Job> getAll() {
-        return tajhizatService.getList();
+        return jobService.getList();
     }
 
 
-    @PostMapping("/tajhizats")
-    public Job saveTajhiz(@RequestBody Job tajhizat) {
-        return tajhizatService.save(tajhizat);
+    @PostMapping("/jobs")
+    public Job saveJob(@RequestBody Job job) {
+        return jobService.save(job);
     }
 
 
-    @GetMapping("/tajhizats/{id}")
-    public ResponseEntity<Optional<Job>> getTajhiz(@PathVariable Long id) {
-        return tajhizatService.getTajhizat(id);
+    @GetMapping("/jobs/{id}")
+    public ResponseEntity<Optional<Job>> getJob(@PathVariable Long id) {
+        return jobService.getJob(id);
     }
 
 
-    @DeleteMapping("/tajhizats/{id}")
-    public void deleteTajhiz(@PathVariable Long id) {
-        tajhizatService.delete(id);
+    @DeleteMapping("/jobs/{id}")
+    public void deleteJob(@PathVariable Long id) {
+        jobService.delete(id);
 
     }
 }

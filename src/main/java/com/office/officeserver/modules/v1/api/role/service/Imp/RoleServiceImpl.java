@@ -15,31 +15,34 @@ import java.util.Optional;
 @Service
 public class RoleServiceImpl implements RoleService {
 
-    @Autowired
-    private RoleRepository tajhizatRepository;
+    private final RoleRepository roleRepository;
 
-
-    public List<Role> getList() {
-        List<Role> tajhizats = new ArrayList<>();
-        List<Role> allTajhizat = tajhizatRepository.findAll();
-        for (Role tajhizat : allTajhizat) {
-            tajhizats.add(tajhizat);
-        }
-        return tajhizats;
+    public RoleServiceImpl(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
     }
 
 
-    public ResponseEntity<Optional<Role>> getTajhizat(Long id) {
-        return new ResponseEntity<>(tajhizatRepository.findById(id), HttpStatus.ACCEPTED);
+    public List<Role> getList() {
+        List<Role> roles = new ArrayList<>();
+        List<Role> allRole = roleRepository.findAll();
+        for (Role role : allRole) {
+            roles.add(role);
+        }
+        return roles;
+    }
+
+
+    public ResponseEntity<Optional<Role>> getRole(Long id) {
+        return new ResponseEntity<>(roleRepository.findById(id), HttpStatus.ACCEPTED);
     }
 
 
     public Role save(Role t) {
-        return tajhizatRepository.save(t);
+        return roleRepository.save(t);
     }
 
 
     public void delete(Long id) {
-        tajhizatRepository.deleteById(id);
+        roleRepository.deleteById(id);
     }
 }
