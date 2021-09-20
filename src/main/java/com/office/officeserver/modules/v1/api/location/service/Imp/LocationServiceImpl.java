@@ -39,7 +39,6 @@ public class LocationServiceImpl implements LocationService {
     }
 
     public String delete(Long id) {
-
         locationRepository.deleteById(id);
         return "deleted";
     }

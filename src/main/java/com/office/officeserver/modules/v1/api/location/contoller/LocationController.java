@@ -21,11 +21,17 @@ public class LocationController {
         this.locationService = locationService;
     }
 
-
     @GetMapping("/locations")
     public ResponseEntity<Object> getAll() {
-        List<Location> result = locationService.getList();
-        return ResponseHandler.generateResponse("Successfully Is Ok Return Data!", HttpStatus.OK, result);
+        try {
+            List<Location> result = locationService.getList();
+            if (result.isEmpty()) {
+                return ResponseHandler.generateResponse("Successfully Empty Location", HttpStatus.OK, result);
+            }
+            return ResponseHandler.generateResponse("Successfully All Location!", HttpStatus.OK, result);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
+        }
     }
 
 
@@ -37,7 +43,6 @@ public class LocationController {
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
         }
-
     }
 
 
@@ -56,6 +61,9 @@ public class LocationController {
     public ResponseEntity<Object> deleteLocation(@PathVariable Long id) {
         try {
             String result = locationService.delete(id);
+            if (result == null) {
+                return ResponseHandler.generateResponse("Successfully Not Content!", HttpStatus.NO_CONTENT, null);
+            }
             return ResponseHandler.generateResponse("Successfully Deleted item!", HttpStatus.OK, result);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
