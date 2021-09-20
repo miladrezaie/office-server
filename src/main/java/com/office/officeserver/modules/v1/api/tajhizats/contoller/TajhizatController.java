@@ -1,6 +1,6 @@
 package com.office.officeserver.modules.v1.api.tajhizats.contoller;
 
-import com.office.officeserver.modules.v1.api.location.service.Imp.LocationServiceImpl;
+
 import com.office.officeserver.modules.v1.api.tajhizats.model.Tajhizat;
 import com.office.officeserver.modules.v1.api.tajhizats.service.Imp.TajhizatServiceImpl;
 import org.springframework.http.ResponseEntity;

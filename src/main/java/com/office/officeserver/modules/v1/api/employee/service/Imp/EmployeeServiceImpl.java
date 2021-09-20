@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
+import java.util.*;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -21,7 +22,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-
     public List<Employee> getList() {
         List<Employee> employees = new ArrayList<>();
         List<Employee> allEmployee = employeeRepository.findAll();
@@ -31,16 +31,28 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employees;
     }
 
-
     public ResponseEntity<Optional<Employee>> getEmployee(Long id) {
         return new ResponseEntity<>(employeeRepository.findById(id), HttpStatus.ACCEPTED);
     }
 
+    public Employee save(Employee employee, MultipartFile file) {
 
-    public Employee save(Employee t) {
-        return employeeRepository.save(t);
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+
+        try {
+
+            if (fileName.contains("..")) {
+//                throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+                System.out.println("not a valid file");
+            }
+            employee.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException ex) {
+//            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+            System.out.println("errrrrorr");
+        }
+
+        return employeeRepository.save(employee);
     }
-
 
     public void delete(Long id) {
         employeeRepository.deleteById(id);

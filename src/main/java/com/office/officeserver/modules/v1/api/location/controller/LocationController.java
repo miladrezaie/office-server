@@ -1,9 +1,8 @@
-package com.office.officeserver.modules.v1.api.location.contoller;
+package com.office.officeserver.modules.v1.api.location.controller;
 
 import com.office.officeserver.modules.v1.api.location.model.Location;
 import com.office.officeserver.modules.v1.api.location.response.ResponseHandler;
 import com.office.officeserver.modules.v1.api.location.service.Imp.LocationServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

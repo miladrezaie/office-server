@@ -19,28 +19,23 @@ public class PlanController {
         this.PlanService = PlanService;
     }
 
-
-    @GetMapping("/Plans")
+    @GetMapping("/plans")
     public List<Plan> getAll() {
         return PlanService.getList();
     }
 
-
-    @PostMapping("/Plans")
+    @PostMapping("/plans")
     public Plan savePlan(@RequestBody Plan Plan) {
         return PlanService.save(Plan);
     }
 
-
-    @GetMapping("/Plans/{id}")
+    @GetMapping("/plans/{id}")
     public ResponseEntity<Optional<Plan>> getPlan(@PathVariable Long id) {
         return PlanService.getPlan(id);
     }
 
-
-    @DeleteMapping("/Plans/{id}")
+    @DeleteMapping("/plans/{id}")
     public void deletePlan(@PathVariable Long id) {
         PlanService.delete(id);
-
     }
 }
