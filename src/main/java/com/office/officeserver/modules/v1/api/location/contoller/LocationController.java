@@ -1,8 +1,10 @@
 package com.office.officeserver.modules.v1.api.location.contoller;
 
 import com.office.officeserver.modules.v1.api.location.model.Location;
+import com.office.officeserver.modules.v1.api.location.response.ResponseHandler;
 import com.office.officeserver.modules.v1.api.location.service.Imp.LocationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,26 +23,43 @@ public class LocationController {
 
 
     @GetMapping("/locations")
-    public List<Location> getAll() {
-        return locationService.getList();
+    public ResponseEntity<Object> getAll() {
+        List<Location> result = locationService.getList();
+        return ResponseHandler.generateResponse("Successfully Is Ok Return Data!", HttpStatus.OK, result);
     }
 
 
     @PostMapping("/locations")
-    public Location saveLocation(@RequestBody Location location) {
-        return locationService.save(location);
+    public ResponseEntity<Object> saveLocation(@RequestBody Location location) {
+        try {
+            Location result = locationService.save(location);
+            return ResponseHandler.generateResponse("Successfully Created!", HttpStatus.CREATED, result);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
+        }
+
     }
 
 
     @GetMapping("/locations/{id}")
-    public ResponseEntity<Optional<Location>> getLocation(@PathVariable Long id) {
-        return locationService.getLocation(id);
+    public ResponseEntity<Object> getLocation(@PathVariable Long id) {
+        try {
+            Optional<Location> result = locationService.getLocation(id);
+            return ResponseHandler.generateResponse("Successfully Is Ok Return Data!", HttpStatus.OK, result);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
+        }
     }
 
 
     @DeleteMapping("/locations/{id}")
-    public void deleteLocation(@PathVariable Long id) {
-        locationService.delete(id);
+    public ResponseEntity<Object> deleteLocation(@PathVariable Long id) {
+        try {
+            String result = locationService.delete(id);
+            return ResponseHandler.generateResponse("Successfully Deleted item!", HttpStatus.OK, result);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
+        }
 
     }
 }

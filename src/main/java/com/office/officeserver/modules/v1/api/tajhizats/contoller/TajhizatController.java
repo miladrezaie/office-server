@@ -1,8 +1,8 @@
 package com.office.officeserver.modules.v1.api.tajhizats.contoller;
 
+import com.office.officeserver.modules.v1.api.location.service.Imp.LocationServiceImpl;
 import com.office.officeserver.modules.v1.api.tajhizats.model.Tajhizat;
 import com.office.officeserver.modules.v1.api.tajhizats.service.Imp.TajhizatServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +15,7 @@ import java.util.Optional;
 public class TajhizatController {
 
     private final TajhizatServiceImpl tajhizatService;
+
 
     public TajhizatController(TajhizatServiceImpl tajhizatService) {
         this.tajhizatService = tajhizatService;
@@ -30,6 +31,8 @@ public class TajhizatController {
     @PostMapping("/tajhizats")
     public Tajhizat saveTajhiz(@ModelAttribute Tajhizat tajhizat,MultipartFile file) {
         System.out.println("is ok...................................");
+        System.out.println("is ok...................................");
+
 
         return tajhizatService.save(tajhizat,file);
     }

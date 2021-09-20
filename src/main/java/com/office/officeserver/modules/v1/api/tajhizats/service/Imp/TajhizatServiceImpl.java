@@ -1,5 +1,6 @@
 package com.office.officeserver.modules.v1.api.tajhizats.service.Imp;
 
+import com.office.officeserver.modules.v1.api.location.service.Imp.LocationServiceImpl;
 import com.office.officeserver.modules.v1.api.tajhizats.model.Tajhizat;
 import com.office.officeserver.modules.v1.api.tajhizats.repository.TajhizatRepository;
 import com.office.officeserver.modules.v1.api.tajhizats.service.TajhizatService;
@@ -21,6 +22,8 @@ public class TajhizatServiceImpl implements TajhizatService {
 
     @Autowired
     private TajhizatRepository tajhizatRepository;
+    @Autowired
+    private LocationServiceImpl locationService;
 
 
     public List<Tajhizat> getList() {
@@ -39,8 +42,9 @@ public class TajhizatServiceImpl implements TajhizatService {
 
 
     public Tajhizat save(Tajhizat t, MultipartFile file) {
-
+        System.out.println("is ok...............fu......");
         System.out.println(file.getOriginalFilename());
+
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
@@ -48,19 +52,15 @@ public class TajhizatServiceImpl implements TajhizatService {
             if (fileName.contains("..")) {
 //                throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
                 System.out.println("not a valid file");
-
-                System.out.println("not a valid file");
-                System.out.println("not a valid file");
             }
             t.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
-
         } catch (IOException ex) {
 //            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
             System.out.println("errrrrorr");
         }
+
         return tajhizatRepository.save(t);
     }
-
 
     public void delete(Long id) {
         tajhizatRepository.deleteById(id);

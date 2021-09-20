@@ -21,7 +21,6 @@ public class LocationServiceImpl implements LocationService {
         this.locationRepository = locationRepository;
     }
 
-
     public List<Location> getList() {
         List<Location> locations = new ArrayList<>();
         List<Location> allLocation = locationRepository.findAll();
@@ -31,18 +30,18 @@ public class LocationServiceImpl implements LocationService {
         return locations;
     }
 
-
-    public ResponseEntity<Optional<Location>> getLocation(Long id) {
-        return new ResponseEntity<>(locationRepository.findById(id), HttpStatus.ACCEPTED);
+    public Optional<Location> getLocation(Long id) {
+        return locationRepository.findById(id);
     }
-
 
     public Location save(Location t) {
         return locationRepository.save(t);
     }
 
+    public String delete(Long id) {
 
-    public void delete(Long id) {
         locationRepository.deleteById(id);
+        return "deleted";
     }
+
 }
