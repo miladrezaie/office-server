@@ -1,6 +1,7 @@
 package com.office.officeserver.modules.v1.api.officePlan.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.office.officeserver.modules.v1.api.employee.model.Employee;
 import com.office.officeserver.modules.v1.api.tajhizats.model.Tajhizat;
 import com.office.officeserver.modules.v1.api.user.model.User;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "office_plans")
@@ -44,13 +47,19 @@ public class OfficePlan {
     private String location;
 
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<User> users;
+//    @JsonIgnore
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    private List<User> users;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Tajhizat> Tajhizats;
+//    @ManyToMany(mappedBy = "officePlans")
+//    private Set<User> users = new HashSet<>();
+//    @JsonIgnore
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    private List<Tajhizat> Tajhizats;
+
+    @ManyToMany(mappedBy = "officePlans")
+    private Set<Tajhizat> tajhizats = new HashSet<>();
+
 
     @Column(columnDefinition = "smallint")
     private Integer laghv;

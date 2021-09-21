@@ -58,11 +58,10 @@ public class LocationController {
 
     @DeleteMapping("/locations/{id}")
     public ResponseEntity<Object> deleteLocation(@PathVariable Long id) {
+
+
         try {
             String result = locationService.delete(id);
-            if (result == null) {
-                return ResponseHandler.generateResponse("Successfully Not Content!", HttpStatus.NO_CONTENT, null);
-            }
             return ResponseHandler.generateResponse("Successfully Deleted item!", HttpStatus.OK, result);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);

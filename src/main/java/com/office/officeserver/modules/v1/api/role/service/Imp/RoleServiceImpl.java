@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,7 @@ public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
 
+    @Autowired
     public RoleServiceImpl(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
@@ -31,17 +33,18 @@ public class RoleServiceImpl implements RoleService {
         return roles;
     }
 
-
+    @Transactional
     public ResponseEntity<Optional<Role>> getRole(Long id) {
         return new ResponseEntity<>(roleRepository.findById(id), HttpStatus.ACCEPTED);
     }
 
-
+    @Transactional
     public Role save(Role t) {
         return roleRepository.save(t);
     }
 
 
+    @Transactional
     public void delete(Long id) {
         roleRepository.deleteById(id);
     }
