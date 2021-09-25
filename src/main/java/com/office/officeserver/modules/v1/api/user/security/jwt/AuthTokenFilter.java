@@ -31,11 +31,20 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         try {
             String jwt = parseJwt(httpServletRequest);
+            System.out.println("1111111111111111");
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+                System.out.println("22222222");
+
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
+                System.out.println("33333333333333");
+
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                System.out.println("44444444444444444");
+
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
+                System.out.println("555555555555555");
+
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);

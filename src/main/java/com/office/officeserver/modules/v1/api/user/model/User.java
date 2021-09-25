@@ -21,7 +21,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "personal_id"),
+        @UniqueConstraint(columnNames = "username"),
         @UniqueConstraint(columnNames = "email")
 })
 @Getter
@@ -36,9 +36,9 @@ public class User {
     private Long id;
 
 
-    @Column(name = "personal_id", columnDefinition = "nvarchar(10)", unique = true)
+    @Column(name = "username", columnDefinition = "nvarchar(10)", unique = true)
     @NotBlank
-    private String personal_id;
+    private String username;
 
 
     @Column(name = "first_name", columnDefinition = "nvarchar(20)")
@@ -51,8 +51,8 @@ public class User {
     private String email;
 
 
-    @NotBlank
-    @Pattern(regexp = "(^$|[0-9]{10})")
+//    @NotBlank
+//    @Pattern(regexp = "(^$|[0-9]{10})")
     private String mobile;
 
     @Column(name = "last_name", columnDefinition = "nvarchar(20)")
@@ -94,16 +94,24 @@ public class User {
     private List<Employee> employees;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles",
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User(String personal_id, String email, String password) {
-        this.personal_id = personal_id;
+    public User(String username, String email, String password) {
+        this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
 

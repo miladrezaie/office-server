@@ -17,7 +17,7 @@ public class UserDetailsImpl implements UserDetails {
 
     private Long id;
 
-    private String personal_id;
+    private String username;
 
     private String email;
 
@@ -29,20 +29,25 @@ public class UserDetailsImpl implements UserDetails {
     public UserDetailsImpl(Long id, String username, String email, String password,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.personal_id = username;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
     }
 
     public static UserDetailsImpl build(User user) {
+
+//        System.out.println("3......77777777777777777777777777777....."+user.getRoles().stream().);
+//        System.out.println("3......77777777777777777777777777777.....0000");
+
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
-
+        System.out.println("3......77777777777777777777777777777.....");
+        System.out.println("3......77777777777777777777777777777.....>>>>>>>>>"+authorities);
         return new UserDetailsImpl(
                 user.getId(),
-                user.getPersonal_id(),
+                user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
                 authorities);
@@ -68,7 +73,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return personal_id;
+        return username;
     }
 
     @Override

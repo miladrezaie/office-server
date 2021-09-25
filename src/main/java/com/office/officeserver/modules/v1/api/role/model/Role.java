@@ -1,6 +1,7 @@
 package com.office.officeserver.modules.v1.api.role.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.office.officeserver.modules.v1.api.employee.model.Employee;
 import com.office.officeserver.modules.v1.api.tajhizats.model.Tajhizat;
 import com.office.officeserver.modules.v1.api.user.model.User;
 import lombok.AllArgsConstructor;
@@ -28,5 +29,6 @@ public class Role {
     @Column(length = 20)
     private ERole name;
 
-
+//    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+//    private List<User> users;
 }

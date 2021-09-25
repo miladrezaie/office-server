@@ -1,9 +1,8 @@
 package com.office.officeserver.modules.v1.api.user.payload.response;
 
-import jdk.nashorn.internal.objects.annotations.Constructor;
-import lombok.AllArgsConstructor;
+
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
 import lombok.Setter;
 
 import java.util.List;
